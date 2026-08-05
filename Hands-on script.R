@@ -103,7 +103,7 @@ fieldView(single_layer,
 
 ### Option_01 = Using fieldKmeans() to extract soil
 Test.kmean<-fieldKmeans(mosaic=Test.Indices$GLI,
-                        clusters = 3)
+                        clusters = 2)
 
 fieldView(Test.kmean)
 #cluster 1 represents plants
@@ -123,23 +123,6 @@ fieldView(Test.RemSoil$newMosaic,
           type = 2,
           alpha_grid = 0.2)
 
-
-
-# Soil Mask (removing soil):
-soil<-classification$rastPred=="soil"
-Test.RemSoil<-fieldMask(Test.Indices,
-                        mask = soil) 
-fieldView(Test.RemSoil$newMosaic,
-          fieldShape = editShape,
-          type = 2,
-          alpha_grid = 0.2)
-
-### Option_03 = Using the traditional FIELDimageR::fieldMask()
-Test.RemSoil<-fieldMask(Test.Indices) 
-fieldView(Test.RemSoil$newMosaic,
-          fieldShape = editShape,
-          type = 2,
-          alpha_grid = 0.2)
 
 ############################
 ### Extracting plot data ###
