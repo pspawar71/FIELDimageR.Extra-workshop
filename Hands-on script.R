@@ -5,10 +5,6 @@
 ################
 ### Packages ### 
 ################
-
-#devtools::install_github("filipematias23/FIELDimageR.Extra")
-devtools::install_github("OpenDroneMap/FIELDimageR")
-
 library(FIELDimageR)
 library(FIELDimageR.Extra)
 library(terra)
@@ -127,33 +123,7 @@ fieldView(Test.RemSoil$newMosaic,
           type = 2,
           alpha_grid = 0.2)
 
-### Option_02 = Using fieldSegment() - Supervised image segmentation
 
-# Digitize soil object by drawing polygons at least 5-6 large polygon uniformly distributed
-soil<-fieldView(mosaic = Test, editor = TRUE) #generate random 200 points for soil class
-soil<-st_as_sf(st_sample(soil, 200))
-soil$class<-'soil'
-
-# Digitize plants object by drawing polygons. The number of polygon will depends upon the number
-# of training points to be generated.
-plants<-fieldView(mosaic = Test, editor = TRUE)
-plants<-st_as_sf(st_sample(plants, 200)) #generate random 200 points for plants class
-plants$class<-'plants'
-
-#similarly you can digitize shadow, other objects by using draw polygon tool of editor
-training_sam<-rbind(soil,plants)
-
-# Random FOrest classification: 
-classification<-fieldSegment(mosaic = Test, 
-                             trainDataset = training_sam,
-                             model = "rf")
-
-# To display results of classification from randomForest
-classification$sup_model
-classification$pred
-classification$rastPred
-fieldView(classification$rastPred)
-plot(classification$rastPred)
 
 # Soil Mask (removing soil):
 soil<-classification$rastPred=="soil"
