@@ -191,19 +191,3 @@ Field_plot_grids<- fieldCrop_grid(mosaic = Test.Indices,
                                   output_dir = "./")
 
 fieldView(mosaic = Field_plot_grids$'1')
-
-fieldView(mosaic = Field_plot_grids$'1',
-          fieldShape = editShape,
-          plotCol ="Maturity")
-
-# Reading .tif file and visualizing single plots with fieldView()
-Field_plot_grids<- fieldCrop_grid(mosaic = rast(Test.Indices),
-                                  fieldShape = editShape, 
-                                  classifier = "Maturity", 
-                                  plotID = "Plot",
-                                  format = '.tif',
-                                  output_dir = "./")
-tif<-rast("./2/21.tif")
-fieldView(mosaic = tif,
-          fieldShape = editShape,
-          plotCol ="Maturity")
